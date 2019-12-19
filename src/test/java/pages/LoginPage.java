@@ -31,6 +31,7 @@ public class LoginPage extends SuiteManager {
         username.sendKeys(config.getProperty("username"));
         password.sendKeys(config.getProperty("password"));
         clickLoginButton.click();
+        System.out.println("Entered login details and clicked login button");
         return new HomePage();
     }
 }

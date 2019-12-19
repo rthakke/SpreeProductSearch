@@ -10,27 +10,30 @@ import java.net.MalformedURLException;
 
 public class SuiteManager {
     DriverManager driverManager;
+   // String browser;
 
     private static ConfigFileReader config = new ConfigFileReader();
 
     @BeforeSuite (alwaysRun = true)
     public void startDriver() throws MalformedURLException {
         driverManager = new DriverManager();
+        System.out.println("Driver initialized");
 
     }
 
     @AfterSuite
     public void quitDriver(){
-
-        driverManager.driver.quit();
+        DriverManager.driver.quit();
+        System.out.println("Driver closed");
     }
 
-     @BeforeClass
+    @BeforeClass
     public void launchUrl() {
-       // DriverManager.driver.manage().window().maximize();
+
+        DriverManager.driver.manage().window().maximize();
         String baseUrl = config.getProperty("base_url");
-        System.out.println("Base Url  " + baseUrl);
-        //DriverManager.driver.get(baseUrl);
-         driverManager.driver.get(baseUrl);
+        DriverManager.driver.get(baseUrl);
+        System.out.println("Launched the url " + baseUrl);
+
     }
 }
